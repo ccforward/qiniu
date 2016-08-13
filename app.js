@@ -42,45 +42,56 @@ console.log('@http://' + HTTP_OPTIONS.hostname + ':' + HTTP_OPTIONS.port);
 var fileProcess = {
     uploadWebImage: function(url, callback){
         var _self = this;
-        _self._download(url, function(err, tmpFile){
-            if(err){
-                callback(err);
-            }else {
-                console.log(tmpFile)
-                var qiniuURL = 'img/' + md5(url) + '.' + tmpFile.format;
-                API.uploadFile(API.uptoken(qiniuURL), qiniuURL, tmpFile.localPath, function(err, d){
-                    fs.unlink(tmpFile.localPath);
-                    if(err){
-                        callback(err);
-                    }else {
-                        console.log(d);
-                        callback(CONFIG.qiniu.host + qiniuURL);
-                    }
-                });
-            }
-        })
+        if(url.startsWith('file://')){
+            var localURL = decodeURI(url.replace('file://','')),
+                qiniuURL = 'img/' + md5(localURL) + '.' + (localURL.split('.')[1] || '');
+            API.uploadFile(API.uptoken(qiniuURL), qiniuURL, localURL, function(err, d){
+                if(err){
+                    callback(err);
+                }else {
+                    console.log(d);
+                    callback(CONFIG.qiniu.host + qiniuURL);
+                }
+            });
+        }else {
+            _self._download(url, (err, tmpFile) => {
+                if(err){
+                    callback(err);
+                }else {
+                    var qiniuURL = 'img/' + md5(url) + '.' + tmpFile.format;
+                    API.uploadFile(API.uptoken(qiniuURL), qiniuURL, tmpFile.localPath, function(err, d){
+                        fs.unlink(tmpFile.localPath);
+                        if(err){
+                            callback(err);
+                        }else {
+                            console.log(d);
+                            callback(CONFIG.qiniu.host + qiniuURL);
+                        }
+                    });
+                }
+            })
+        }
     },
     _download: function(url, upFileFn){
         var requestType = http;
-        if(url.split(':')[0] == 'https') {
+        if(url.startsWith == 'https') {
             requestType = https;
         }
-        requestType.get(url, function(res){
+        requestType.get(url, (res) => {
             // 限制文件类型大小
             // content-type对照表 http://tool.oschina.net/commons
             var headers = res.headers,
                 format = headers['content-type'].split('/')[1],
                 size = headers['content-length'] / (1024*1024);
-
             if(size > CONFIG.upload.size || CONFIG.upload.types.indexOf(format) == -1){
                 upFileFn('too large or not support file type');
             }else {
                 var imgData = '';
                 res.setEncoding('binary');
-                res.on('data', function(chunk){
+                res.on('data', (chunk) => {
                     imgData += chunk;
                 });
-                res.on('end', function(){ 
+                res.on('end', () => { 
                     var tmpFile = {
                         localPath: './tmp/tmp_' + new Date().getTime() + '.' + format,
                         format: format
@@ -90,6 +101,9 @@ var fileProcess = {
                     });
                 })
             }
-        });
+        }).on('error', (e) => {
+            upFileFn('can not find this file: ' + e.message);
+            console.log(`${e.message}`);
+        });;
     }
 }

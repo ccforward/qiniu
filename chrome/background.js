@@ -7,14 +7,9 @@ chrome.contextMenus.create({
 
 
 function evt(info, tab){
-    if(false){
-        alert(info.srcUrl);
-    }else {
-    	ajax(info.srcUrl, function(data){
-            alert(data);
-        });
-    }
-	
+	ajax(info.srcUrl, function(data){
+        alert(data);
+    });
 }
 function ajax(url, callback){
     if(url){
