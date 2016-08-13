@@ -8,12 +8,12 @@
       "64": "img/rubik_64.png",
       "128": "img/rubik_128.png"
    },
-   "content_scripts": [ {
-      "all_frames": true,
-      "js": [ "content.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
-      "run_at": "document_end"
-   } ],
+   // "content_scripts": [ {
+   //    "all_frames": true,
+   //    "js": [ "content.js" ],
+   //    "matches": [ "http://*/*", "https://*/*" ],
+   //    "run_at": "document_end"
+   // } ],
    "options_page": "option.html",
    "background": {
       "scripts": ["background.js"]

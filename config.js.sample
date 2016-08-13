@@ -1,0 +1,20 @@
+var config = {
+    qiniu: {
+        host: 'http://7xiblh.com1.z0.glb.clouddn.com/',
+        ACCESS_KEY: '',
+        SECRET_KEY: '',
+        bucketname: '',
+        folder: 'img'
+    },
+    upload: {
+        size: '5', // 单位 MB
+        types: ['x-jpg', 'jpeg', 'jpg', 'gif', 'png', 'x-png', 'webp'],
+        errMessage: 'too large or not support file type'
+    },
+    http: {
+        port: 5502,
+        path: '/upload'
+    }
+}
+
+module.exports = config

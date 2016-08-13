@@ -7,12 +7,12 @@ qiniu.conf.SECRET_KEY = CONFIG.qiniu.SECRET_KEY;
 
 var API = {
     //构建上传策略函数
-    uptoken: function (key) {
+    uptoken: (key) => {
         var putPolicy = new qiniu.rs.PutPolicy(CONFIG.qiniu.bucketname + ":" + key);
         return putPolicy.token();
     },
     //构造上传函数
-    uploadFile: function (uptoken, key, localFile, callback) {
+    uploadFile: (uptoken, key, localFile, callback) => {
         var extra = new qiniu.io.PutExtra();
         qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
             if(!err) {
