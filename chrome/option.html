@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>选项</title>
+</head>
+<style>
+    .wrap {
+        width: 600px;
+        margin: 60px auto;
+        font-family: 'Hiragino Sans GB',"Microsoft Yahei","helvetica neue",arial,sans-serif;
+    }
+    .box {
+        position: relative;
+        margin-bottom: 25px;
+        padding-bottom: 60px;
+        background: #FFF;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    .logo {
+        height: 65px;
+        margin: 10px 0 0 5px;
+        line-height: 60px;
+        font-size: 28px;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid #EDEDED;
+    }
+    .logo img {
+        margin: 10px 0 0 10px;
+    }
+    .setting {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 18px;
+        
+
+    }
+    .setting .setting-item {
+        margin-bottom: 10px;
+    }
+    .setting .setting-item label {
+        display: inline-block;
+        width: 75px;
+    }
+    .setting .setting-item input {
+        width: 355px;
+        height: 22px;
+        font-size: 18px;
+    }
+    .setting .my-token {
+        color: #6287FF;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    .save-btn {
+        display: block;
+        width: 80px;
+        height: 40px;
+        margin: 20px auto 0;
+        line-height: 40px;
+        color: #fff;
+        border-radius: 5px;
+        background: #F74348;
+        text-align: center;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .input-box, .show-box {
+        padding: 10px 0;
+    }
+    .show-box {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        bottom: -70px;
+        width: 100%;
+        height: 100px;
+        background: #fff;
+
+    }
+</style>
+<body>
+    
+    <div class="wrap">
+        <div class="box">
+            <div class="logo">
+                <img src="http://gtms04.alicdn.com/tps/i4/TB1HDtkGXXXXXajXFXXKWEkQXXX-409-45.png" alt="">
+            </div>
+            <div class="input-box">
+                <div class="setting">
+                    <div class="setting-item">
+                        <label for="J_Nick">Nick:</label>
+                        <input type="text" id="J_Nick" />
+                    </div>
+                </div>
+                <a class="save-btn" id="J_Save">保 存</a>
+            </div>
+            
+        </div>
+    </div>
+
+<script type="text/javascript" src="assets/jquery.js"></script>
+<script type="text/javascript" src="assets/option.js"></script>
+</body>
+</html>

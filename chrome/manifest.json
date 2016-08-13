@@ -1,0 +1,26 @@
+{
+   "name": "IMAGE",
+   "version": "1.0",
+   "description": "An image upload tool",
+   "icons": {
+      "16": "img/rubik_16.png",
+      "48": "img/rubik_48.png",
+      "64": "img/rubik_64.png",
+      "128": "img/rubik_128.png"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "content.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "options_page": "option.html",
+   "background": {
+      "scripts": ["background.js"]
+   },
+
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+   "manifest_version": 2,
+   "permissions": [ "contextMenus", "tabs", "http://*/*", "https://*/*", "webRequest", "webRequestBlocking" ]
+}
