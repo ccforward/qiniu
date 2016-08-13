@@ -1,0 +1,26 @@
+{
+  "name": "qiniu-upload",
+  "version": "1.0.0",
+  "description": "qiniu upload",
+  "main": "app.js",
+  "dependencies": {
+    "qiniu": "^6.1.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccforward/qiniu.git"
+  },
+  "keywords": [
+    "qiniu"
+  ],
+  "author": "cc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccforward/qiniu/issues"
+  },
+  "homepage": "https://github.com/ccforward/qiniu#readme"
+}
