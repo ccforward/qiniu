@@ -1,12 +1,12 @@
 var API = require('./api');
 var md5 = require('md5');
+var mime = require('mime');
 var http = require('http'),
     https = require('https'),
     fs = require('fs'),
     path = require('path'),
     url = require('url');
 const CONFIG = require('./config');
-
 
 const HTTP_OPTIONS = {
     hostname: 'localhost',
@@ -46,7 +46,9 @@ var FileProcess = {
         if(url.startsWith('file://')){
             var localURL = decodeURI(url.replace('file://','')),
                 size = fs.statSync(localURL).size / (1024*1024),
-                format = path.extname(localURL).split('.').pop();
+                // 用 mime 判断文件类型
+                format = mime.extension(mime.lookup(localURL));
+            format === 'jpeg' && (format = 'jpg');
             if(size > CONFIG.upload.size || CONFIG.upload.types.indexOf(format) == -1){
                 callback(CONFIG.upload.errMessage);
             }else {

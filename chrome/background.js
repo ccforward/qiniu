@@ -18,7 +18,7 @@ function ajax(url, callback){
             if(xhr.readyState == 4 && xhr.status == 200){
                 callback(xhr.responseText);
             }
-        }
+        };
         xhr.open('GET', 'http://localhost:5502/upload?url=' + url, true);
         xhr.send();
     }else {
