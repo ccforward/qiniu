@@ -1,6 +1,6 @@
 chrome.contextMenus.create({
     "type": "normal",
-    "title": "上传这张图片(向我曾经的cdn插件致敬)",
+    "title": "上传图片(向我曾经的cdn插件致敬)",
     "contexts": ["image"],
     "onclick": evt
 });
@@ -19,7 +19,7 @@ function ajax(url, callback){
                 callback(xhr.responseText);
             }
         };
-        xhr.open('GET', 'http://localhost:5502/upload?url=' + url, true);
+        xhr.open('GET', 'http://localhost:8003/upload?url=' + url, true);
         xhr.send();
     }else {
         callback('no image');

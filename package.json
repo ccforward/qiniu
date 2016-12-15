@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "qiniu upload",
   "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
   "dependencies": {
     "md5": "^2.1.0",
     "mime": "^1.3.4",

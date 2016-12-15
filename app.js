@@ -43,7 +43,7 @@ console.log('@http://' + HTTP_OPTIONS.hostname + ':' + HTTP_OPTIONS.port);
 var FileProcess = {
     uploadWebImage: (url, callback) => {
         var _self = this;
-        if(url.startsWith('file://')){
+        if(url.startsWith('file://') || url.startsWith('/')){
             var localURL = decodeURI(url.replace('file://','')),
                 size = fs.statSync(localURL).size / (1024*1024),
                 // 用 mime 判断文件类型
@@ -52,7 +52,7 @@ var FileProcess = {
             if(size > CONFIG.upload.size || CONFIG.upload.types.indexOf(format) == -1){
                 callback(CONFIG.upload.errMessage);
             }else {
-                var qiniuURL = CONFIG.qiniu.folder + '/' + md5(localURL) + '.' + (localURL.split('.')[1] || '');
+                var qiniuURL = CONFIG.qiniu.folder + '/' + md5(localURL) + '.' + (format || '');
                 API.uploadFile(API.uptoken(qiniuURL), qiniuURL, localURL, (err, d)=>{
                     if(err){
                         callback(err);
@@ -83,7 +83,7 @@ var FileProcess = {
     },
     _download: (url, upFileFn) => {
         var requestType = http;
-        if(url.startsWith == 'https') {
+        if(url.startsWith('https')) {
             requestType = https;
         }
         requestType.get(url, (res) => {
